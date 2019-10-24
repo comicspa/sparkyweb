@@ -60,11 +60,11 @@ class _HomeScreenState extends State<HomeScreen>
         backgroundColor: Colors.black, //Color.fromRGBO(21, 24, 45, 1.0),
              //Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
         centerTitle: true,
-        leading: Text('leading'), /* IconButton(
+        leading: IconButton(
             tooltip: 'Profile',
             icon: Icon(
               Icons.person,
-              color: Color.fromRGBO(21, 24, 45, 1.0),
+              color: Colors.white, //Color.fromRGBO(21, 24, 45, 1.0),
             ),
             onPressed: () { 
               /* showDialog(
@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen>
               ),
             );
             },
-          ), */
+          ),
 
         title: Text('Title'), /* Image.asset(
           'images/sparky_logo.svg',
