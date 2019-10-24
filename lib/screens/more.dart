@@ -12,6 +12,8 @@ import 'package:sparkyweb/screens/more/version_info.dart';
 // import 'package:sparkyweb/screens/more/service_info_submenu.dart';
 // import 'package:sparkyweb/packets/packet_c2s_user_info.dart';
 import 'package:sparkyweb/screens/more/translator_submenu.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 
 class MoreScreen extends StatefulWidget {
@@ -209,7 +211,7 @@ class _MoreScreenState extends State<MoreScreen> with WidgetsBindingObserver {
             ),
             
             ListTile(
-              leading: Icon(Icons.info),
+              leading: Icon(FontAwesomeIcons.solidStickyNote),
               title: Text(
                 'Service Info',
                 textAlign: TextAlign.left,

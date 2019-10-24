@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:sparkyweb/screens/profile.dart';
 import 'coming_soon.dart';
 // import 'library.dart';
@@ -57,10 +58,37 @@ class _HomeScreenState extends State<HomeScreen>
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
-        backgroundColor: Colors.black, //Color.fromRGBO(21, 24, 45, 1.0),
+        backgroundColor: Colors.lightBlueAccent,//Color.fromRGBO(21, 24, 45, 1.0),
              //Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
         centerTitle: true,
         leading: IconButton(
+            tooltip: 'Profile',
+            icon: Icon(
+              Icons.menu,
+              color: Colors.white, //Color.fromRGBO(21, 24, 45, 1.0),
+            ),
+            onPressed: () { 
+              /* showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return BuildAlertDialog();
+                },
+              ); */
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ComingSoonScreen(),
+              ),
+            );
+            },
+          ),
+
+        title: Image.asset(
+          'sparky_logo.png',
+          width: ManageDeviceInfo.resolutionWidth * 0.045,
+          height: ManageDeviceInfo.resolutionHeight * 0.025,
+        ),
+        actions: <Widget>[
+          IconButton(
             tooltip: 'Profile',
             icon: Icon(
               Icons.person,
@@ -80,18 +108,11 @@ class _HomeScreenState extends State<HomeScreen>
             );
             },
           ),
-
-        title: Text('Title'), /* Image.asset(
-          'images/sparky_logo.svg',
-          width: ManageDeviceInfo.resolutionWidth * 0.045,
-          height: ManageDeviceInfo.resolutionHeight * 0.025,
-        ), */
-        actions: <Widget>[
-          
-          /* IconButton(
+          IconButton(
+            tooltip: 'Search',
             icon: Icon(
-              Icons.search,
-                color: Color.fromRGBO(21, 24, 45, 1.0),
+              FontAwesomeIcons.search,
+                color: Colors.white,
             ),
             onPressed: () {
               showDialog(
@@ -107,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen>
 //                  ),
 //                );
             },
-          ), */
+          ),
         ],
       ),
       body: TabBarView(
@@ -125,21 +146,25 @@ class _HomeScreenState extends State<HomeScreen>
         ],
       ),
       bottomNavigationBar: TabBar(
+        
         isScrollable: false,
         labelColor: Color.fromRGBO(21, 24, 45, 1.0),
 //          labelStyle: TextStyle(fontSize: 5.0, fontWeight: FontWeight.bold),
         indicatorWeight: 2,
-        unselectedLabelColor: Colors.grey,
+        unselectedLabelColor: Colors.blueGrey,
         indicatorColor: Colors.redAccent,
         controller: controller,
         tabs: <Widget>[
           Tab(
             icon: Icon(
-            Icons.home,
-            color: controller.index == 0
-                ? Colors.redAccent
-                : Colors.grey,
+              
+              Icons.home,
+              color: controller.index == 0
+                  ? Colors.redAccent
+                  : Colors.blueGrey,
+              
             ),
+            
           ), 
 //            Tab(
 //                icon: Icon(
@@ -156,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen>
             Icons.collections,
             color: controller.index == 1
                 ? Colors.redAccent
-                : Colors.grey,
+                : Colors.blueGrey,
           )),
 
           Tab(
@@ -169,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen>
                   Icons.email,
                   color: controller.index == 2
                         ? Colors.redAccent
-                        : Colors.black
+                        : Colors.blueGrey
                 ),
               // ),
           ),
@@ -178,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen>
             Icons.menu,
             color: controller.index == 3
                 ? Colors.redAccent
-                : Colors.black,
+                : Colors.blueGrey,
           )),
           //Tab(text: 'More', icon: Icon(Icons.menu)),
         ],
