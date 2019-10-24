@@ -55,65 +55,60 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(ManageDeviceInfo.resolutionHeight * 0.055),
-        child: SafeArea(
-          child: AppBar(
-            elevation: 1,
-            backgroundColor: Colors.white, //Color.fromRGBO(21, 24, 45, 1.0),
-                 //Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
-            centerTitle: true,
-            leading: Text('leading'), /* IconButton(
-                tooltip: 'Profile',
-                icon: Icon(
-                  Icons.person,
-                  color: Color.fromRGBO(21, 24, 45, 1.0),
-                ),
-                onPressed: () {
-                  /* showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return BuildAlertDialog();
-                    },
-                  ); */
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ComingSoonScreen(),
-                  ),
-                );
+      appBar: AppBar(
+        elevation: 1,
+        backgroundColor: Colors.black, //Color.fromRGBO(21, 24, 45, 1.0),
+             //Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
+        centerTitle: true,
+        leading: Text('leading'), /* IconButton(
+            tooltip: 'Profile',
+            icon: Icon(
+              Icons.person,
+              color: Color.fromRGBO(21, 24, 45, 1.0),
+            ),
+            onPressed: () { 
+              /* showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return BuildAlertDialog();
                 },
-              ), */
+              ); */
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ComingSoonScreen(),
+              ),
+            );
+            },
+          ), */
 
-            title: Text('Title'), /* Image.asset(
-              'images/sparky_logo.svg',
-              width: ManageDeviceInfo.resolutionWidth * 0.045,
-              height: ManageDeviceInfo.resolutionHeight * 0.025,
-            ), */
-            actions: <Widget>[
-              
-              /* IconButton(
-                icon: Icon(
-                  Icons.search,
-                    color: Color.fromRGBO(21, 24, 45, 1.0),
-                ),
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return BuildAlertDialog(null);
-                    },
-                  );
+        title: Text('Title'), /* Image.asset(
+          'images/sparky_logo.svg',
+          width: ManageDeviceInfo.resolutionWidth * 0.045,
+          height: ManageDeviceInfo.resolutionHeight * 0.025,
+        ), */
+        actions: <Widget>[
+          
+          /* IconButton(
+            icon: Icon(
+              Icons.search,
+                color: Color.fromRGBO(21, 24, 45, 1.0),
+            ),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return BuildAlertDialog(null);
+                },
+              );
 //                Navigator.push(
 //                  context,
 //                  MaterialPageRoute(
 //                    builder: (context) => ComingSoonScreen(),
 //                  ),
 //                );
-                },
-              ), */
-            ],
-          ),
-        ),
+            },
+          ), */
+        ],
       ),
       body: TabBarView(
         controller: controller,
@@ -129,25 +124,23 @@ class _HomeScreenState extends State<HomeScreen>
           MoreScreen(),
         ],
       ),
-      bottomNavigationBar: SizedBox(
-        height: ManageDeviceInfo.resolutionHeight * 0.055,
-        child: TabBar(
-          isScrollable: false,
-          labelColor: Color.fromRGBO(21, 24, 45, 1.0),
+      bottomNavigationBar: TabBar(
+        isScrollable: false,
+        labelColor: Color.fromRGBO(21, 24, 45, 1.0),
 //          labelStyle: TextStyle(fontSize: 5.0, fontWeight: FontWeight.bold),
-          indicatorWeight: 2,
-          unselectedLabelColor: Colors.grey,
-          indicatorColor: Colors.redAccent,
-          controller: controller,
-          tabs: <Widget>[
-            Tab(
-              icon: Icon(
-              Icons.home,
-              color: controller.index == 0
-                  ? Color.fromRGBO(21, 24, 45, 1.0)
-                  : Colors.grey,
-              ),
-            ), 
+        indicatorWeight: 2,
+        unselectedLabelColor: Colors.grey,
+        indicatorColor: Colors.redAccent,
+        controller: controller,
+        tabs: <Widget>[
+          Tab(
+            icon: Icon(
+            Icons.home,
+            color: controller.index == 0
+                ? Colors.redAccent
+                : Colors.grey,
+            ),
+          ), 
 //            Tab(
 //                icon: Icon(
 //                  Icons.palette,
@@ -158,38 +151,37 @@ class _HomeScreenState extends State<HomeScreen>
 //              //    controller.index ==1 ? SvgPicture.asset('images/HomeKey_creater_on.svg', height: ManageDeviceInfo.resolutionHeight * 0.031): SvgPicture.asset('images/HomeKey_creater_off.svg', height: ManageDeviceInfo.resolutionHeight * 0.031),
 //            ),
 
-            Tab(
-                icon: Icon(
-              Icons.collections,
-              color: controller.index == 1
-                  ? Color.fromRGBO(21, 24, 45, 1.0)
-                  : Colors.grey,
-            )),
+          Tab(
+              icon: Icon(
+            Icons.collections,
+            color: controller.index == 1
+                ? Colors.redAccent
+                : Colors.grey,
+          )),
 
-            Tab(
-                icon: /* Badge(
-                  badgeColor: Colors.red,
-                  toAnimate: true,
-                  showBadge: true,
-                  position: BadgePosition.topRight(top: -1, right: -2),
-                  child:  */Icon(
-                    Icons.email,
-                    color: controller.index == 2
-                          ? Color.fromRGBO(21, 24, 45, 1.0)
-                          : Colors.grey,
-                  ),
-                // ),
-            ),
-            Tab(
-                icon: Icon(
-              Icons.menu,
-              color: controller.index == 3
-                  ? Color.fromRGBO(21, 24, 45, 1.0)
-                  : Colors.grey,
-            )),
-            //Tab(text: 'More', icon: Icon(Icons.menu)),
-          ],
-        ),
+          Tab(
+              icon: /* Badge(
+                badgeColor: Colors.red,
+                toAnimate: true,
+                showBadge: true,
+                position: BadgePosition.topRight(top: -1, right: -2),
+                child:  */Icon(
+                  Icons.email,
+                  color: controller.index == 2
+                        ? Colors.redAccent
+                        : Colors.black
+                ),
+              // ),
+          ),
+          Tab(
+              icon: Icon(
+            Icons.menu,
+            color: controller.index == 3
+                ? Colors.redAccent
+                : Colors.black,
+          )),
+          //Tab(text: 'More', icon: Icon(Icons.menu)),
+        ],
       ),
     );
   }
