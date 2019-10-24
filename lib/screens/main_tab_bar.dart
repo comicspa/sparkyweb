@@ -55,13 +55,15 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
         backgroundColor: Colors.lightBlueAccent,//Color.fromRGBO(21, 24, 45, 1.0),
              //Color(0xff202a30), //Colors.black87, // Color(0xFF5986E1),
         centerTitle: true,
-        leading: IconButton(
+        /* leading: IconButton(
             tooltip: 'Profile',
             icon: Icon(
               Icons.menu,
@@ -80,12 +82,20 @@ class _HomeScreenState extends State<HomeScreen>
               ),
             );
             },
+          ), */
+        
+        title: SizedBox(
+          width: screenSize.width < 600 ? screenSize.width * 0.25 : screenSize.width * 0.25,
+          height: screenSize.width < 600 ? screenSize.height * 0.15 : screenSize.height * 0.15,
+          child: Image.asset(
+            'sparky_logo.png',
+            // fit: BoxFit.contain,
+            
+            // width: screenSize.width < 600 ? screenSize.width * 0.25 : screenSize.width * 0.25,
+            // height: screenSize.height * 0.15,
+            
+            
           ),
-
-        title: Image.asset(
-          'sparky_logo.png',
-          width: ManageDeviceInfo.resolutionWidth * 0.045,
-          height: ManageDeviceInfo.resolutionHeight * 0.025,
         ),
         actions: <Widget>[
           IconButton(
@@ -130,6 +140,26 @@ class _HomeScreenState extends State<HomeScreen>
             },
           ),
         ],
+      ),
+      drawer: new Drawer(
+        child: new ListView(
+          children: <Widget> [
+            new DrawerHeader(child: new Text('Header'),),
+            new ListTile(
+              title: new Text('First Menu Item'),
+              onTap: () {},
+            ),
+            new ListTile(
+              title: new Text('Second Menu Item'),
+              onTap: () {},
+            ),
+            new Divider(),
+            new ListTile(
+              title: new Text('About'),
+              onTap: () {},
+            ),
+          ],
+        )
       ),
       body: TabBarView(
         controller: controller,
