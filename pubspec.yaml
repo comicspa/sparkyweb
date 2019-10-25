@@ -22,6 +22,8 @@ dependencies:
   device_info: ^0.4.0+2
   devicelocale: ^0.2.0
   firebase_web: ^5.0.9
+
+
   transparent_image: ^1.0.0
   carousel_slider: ^1.3.1
 

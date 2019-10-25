@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sparkyweb/screens/trend.dart';
 // import 'package:sparkyweb/screens/profile.dart';
 import 'coming_soon.dart';
 // import 'library.dart';
@@ -169,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen>
 //          CreatorScreen(),
           // LibraryScreen(),
           // NotificationScreen(),
-          MoreScreen(),
+          Trend(),
           MoreScreen(),
           MoreScreen(),
           MoreScreen(),

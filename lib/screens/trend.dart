@@ -19,26 +19,9 @@ import 'package:transparent_image/transparent_image.dart';
 // import 'package:sparky/packets/packet_c2s_weekly_trend_comic_info.dart';
 // import 'package:sparky/screens/detail/detail_page.dart';
 import 'common_widgets.dart';
-import 'package:firebase_web/firestore.dart';
 
-//todo move following to main.dart
-/* void main() {
-  assert(() {
-    fb.initializeApp(
-      apiKey: “AIzaSyCUQtTiGpTLRweOxCs_vr2dvaa4-Ss2VW4”,
-      authDomain: "enhanced-grid-251003.firebaseapp.com",
-      databaseURL: "https://enhanced-grid-251003.firebaseio.com",
-      projectId: "enhanced-grid-251003",
-      storageBucket: "enhanced-grid-251003.appspot.com",
-      messagingSenderId: "502860158175",
-      appID: "1:502860158175:web:477f60177e0c1c3986056a",
-    );
-    BlocSupervisor.delegate = SimpleBlocDelegate();
-    return true;
-  }());
 
-  runApp(AppInjector());
-} */
+
 
 
 class Trend extends StatefulWidget {
@@ -185,18 +168,106 @@ class _TrendState extends State<Trend> with WidgetsBindingObserver {
           ), */
 
           Container(
+            height: 50,
+            width: double.infinity,
             alignment: Alignment.centerLeft,
+            color: Colors.white,
             padding: EdgeInsets.fromLTRB(15, 5, 0, 2),
             child: Text( 'Recommended', //ModelLocalizationInfo.getText('trend', 'title_1') //Recommended
                
               style: TextStyle(
-                  fontSize: ManageDeviceInfo.resolutionHeight * 0.024,
+                  fontSize: 14,
                   fontFamily: 'Lato',
                   fontWeight: FontWeight.bold),
               textAlign: TextAlign.left,
             ),
           ),
           Container(
+            padding: EdgeInsets.all(10),
+            color: Colors.indigoAccent,
+            height: 200,
+            width: double.infinity,
+            child: ListView.builder(
+              // physics: BouncingScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: 5,
+              itemBuilder: (BuildContext context, int index) => 
+                Container(
+                  padding: EdgeInsets.all(4),
+                  
+                  width: 300,
+                  height: 150,
+                  decoration: BoxDecoration(borderRadius: new BorderRadius.circular(10.0)),
+                  child: ClipRRect(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    child: FadeInImage.assetNetwork(
+                      placeholder: 'batman_black.webp',
+                      image: 'batman_black.webp', //snapshot.data[index].thumbnailUrl,
+                      fit: BoxFit.fill,
+                      height: 150,
+                    )
+                    /* CachedNetworkImage(
+                      imageUrl: snapshot.data[index].thumbnailUrl,
+                      placeholder: (context, url) => LoadingIndicator(),
+                      fit: BoxFit.cover,
+                      height: ManageDeviceInfo.resolutionHeight * 0.15,
+                    ) */,
+                  ),
+                ),
+            ),
+          ),
+          Container(
+            height: 50,
+            width: double.infinity,
+            alignment: Alignment.centerLeft,
+            color: Colors.white,
+            padding: EdgeInsets.fromLTRB(15, 5, 0, 2),
+            child: Text( '오늘의 추천', //ModelLocalizationInfo.getText('trend', 'title_1') //Recommended
+               
+              style: TextStyle(
+                  fontSize: 14,
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.bold),
+              textAlign: TextAlign.left,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(10),
+            color: Colors.blueGrey[200],
+            height: 200,
+            width: double.infinity,
+            child: ListView.builder(
+              // physics: BouncingScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: 5,
+              itemBuilder: (BuildContext context, int index) => 
+                Container(
+                  padding: EdgeInsets.all(4),
+                  
+                  width: 300,
+                  height: 150,
+                  decoration: BoxDecoration(borderRadius: new BorderRadius.circular(10.0)),
+                  child: ClipRRect(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    child: FadeInImage.assetNetwork(
+                      placeholder: 'onepunchman.webp',
+                      image: 'onepunchman.webp', //snapshot.data[index].thumbnailUrl,
+                      fit: BoxFit.fill,
+                      height: 150,
+                    )
+                    /* CachedNetworkImage(
+                      imageUrl: snapshot.data[index].thumbnailUrl,
+                      placeholder: (context, url) => LoadingIndicator(),
+                      fit: BoxFit.cover,
+                      height: ManageDeviceInfo.resolutionHeight * 0.15,
+                    ) */,
+                  ),
+                ),
+            ),
+          ),
+          /* Container(
             padding: EdgeInsets.all(0),
             height: ManageDeviceInfo.resolutionHeight * 0.28,
             child: FutureBuilder<List<ModelRecommendedComicInfo>>(
@@ -208,7 +279,146 @@ class _TrendState extends State<Trend> with WidgetsBindingObserver {
                 }
               },
             ),
-          ),
+          ), */
+           /* Container(
+            padding: EdgeInsets.all(0),
+            height: ManageDeviceInfo.resolutionHeight * 0.28,
+            child: ListView.builder(
+              physics: BouncingScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: 10,
+              itemBuilder: (BuildContext context, int index) => Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push<Widget>(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ComingSoonScreen()
+                        
+                        // DetailPage(snapshot.data[index].userId, snapshot.data[index].comicId), // link to Actual viewer
+                      ),
+                    );
+                  },
+                  child: Container(            
+                    child: FittedBox(
+                      child: Material(
+                        color: Colors.white,
+                              elevation: 2.0,
+                              borderRadius: BorderRadius.circular(4.0),
+                              shadowColor: Color(0x802196F3),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                              width: ManageDeviceInfo.resolutionWidth * 0.41,
+                              height: ManageDeviceInfo.resolutionHeight * 0.15,
+                              child: ClipRRect(
+                                borderRadius: new BorderRadius.circular(2.0),
+                                child: FadeInImage.memoryNetwork(
+                                  placeholder: kTransparentImage,
+                                  image: 'batman_black.webp', //snapshot.data[index].thumbnailUrl ,
+                                  fit: BoxFit.cover,
+                                  height: ManageDeviceInfo.resolutionHeight * 0.15,
+                                )
+                                /* CachedNetworkImage(
+                                  imageUrl: snapshot.data[index].thumbnailUrl,
+                                  placeholder: (context, url) => LoadingIndicator(),
+                                  fit: BoxFit.cover,
+                                  height: ManageDeviceInfo.resolutionHeight * 0.15,
+                                ) */,
+                              ),
+                            ),
+                            SizedBox(
+                              height: ManageDeviceInfo.resolutionHeight * 0.002), 
+                            Container(
+                              padding: EdgeInsets.only(left: ManageDeviceInfo.resolutionWidth * 0.01),
+                              height: ManageDeviceInfo.resolutionHeight * 0.048,
+                              width: ManageDeviceInfo.resolutionWidth * 0.41,                    
+                              child: Text(  'ㅅㄷㄴㅅ', //snapshot.data[index].title,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontFamily: 'Lato',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: ManageDeviceInfo.resolutionHeight * 0.019,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: ManageDeviceInfo.resolutionHeight * 0.002), 
+                            Container(
+                              width: ManageDeviceInfo.resolutionWidth * 0.41,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+
+                                children: <Widget>[
+                                  Container(
+                                    height: ManageDeviceInfo.resolutionHeight * 0.042,
+                                    width: ManageDeviceInfo.resolutionWidth * 0.20,
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text('ㅅㄷㄴㅅ',
+                                        //snapshot.data[index].userId,
+                                        textAlign: TextAlign.right,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontFamily: 'Lato',
+                                          fontSize: ManageDeviceInfo.resolutionHeight * 0.018,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        ManageDeviceInfo.resolutionWidth * 0.02,
+                                  ),
+                                  Container(
+                                    height: ManageDeviceInfo.resolutionHeight * 0.032,
+                                    child: Icon(
+                                      Icons.remove_red_eye,
+                                      size: ManageDeviceInfo.resolutionHeight * 0.025,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      padding: EdgeInsets.only(right: ManageDeviceInfo.resolutionWidth * 0.02),
+                                      height: ManageDeviceInfo.resolutionHeight * 0.022,
+                                      width: ManageDeviceInfo.resolutionWidth * 0.22,
+                                      child: Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Text(
+                                          '250,589,938', //Todo need to create 조회수 data
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                            fontFamily: 'Lato',
+                                            color: Colors.black87,
+                                            fontSize: ManageDeviceInfo.resolutionHeight * 0.018,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ), */
 
           /* Container(
             alignment: Alignment.centerLeft,

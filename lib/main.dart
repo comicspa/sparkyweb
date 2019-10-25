@@ -1,10 +1,32 @@
+import 'dart:html';
+import 'package:firebase_web/firebase.dart' as fb;
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+
+import 'package:sparkyweb/models/model_recommended_comic_info.dart';
+
+
 import 'package:sparkyweb/screens/main_tab_bar.dart';
 
 import 'screens/more.dart';
 
+
+
 void main() => runApp(new MyApp());
+
+
+
+  
+
+
+
+
+
+
+
   // SystemChrome.setSystemUIOverlayStyle(
   //   SystemUiOverlayStyle(
   //     statusBarColor: Colors.white, //top bar color
