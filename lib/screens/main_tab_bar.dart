@@ -142,25 +142,29 @@ class _HomeScreenState extends State<HomeScreen>
           ),
         ],
       ),
-      drawer: new Drawer(
-        child: new ListView(
-          children: <Widget> [
-            new DrawerHeader(child: new Text('Header'),),
-            new ListTile(
-              title: new Text('First Menu Item'),
-              onTap: () {},
-            ),
-            new ListTile(
-              title: new Text('Second Menu Item'),
-              onTap: () {},
-            ),
-            new Divider(),
-            new ListTile(
-              title: new Text('About'),
-              onTap: () {},
-            ),
-          ],
-        )
+      drawer: new Padding(
+
+        padding: const EdgeInsets.only(top: 70.0),
+        child: new Drawer(
+          child: new ListView(
+            children: <Widget> [
+              new DrawerHeader(child: new Text('Header'),),
+              new ListTile(
+                title: new Text('First Menu Item'),
+                onTap: () {},
+              ),
+              new ListTile(
+                title: new Text('Second Menu Item'),
+                onTap: () {},
+              ),
+              new Divider(),
+              new ListTile(
+                title: new Text('About'),
+                onTap: () {},
+              ),
+            ],
+          )
+        ),
       ),
       body: TabBarView(
         controller: controller,

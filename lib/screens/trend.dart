@@ -19,6 +19,7 @@ import 'package:transparent_image/transparent_image.dart';
 // import 'package:sparky/packets/packet_c2s_weekly_trend_comic_info.dart';
 // import 'package:sparky/screens/detail/detail_page.dart';
 import 'common_widgets.dart';
+import 'package:flutter/gestures.dart' show DragStartBehavior;
 
 
 
@@ -79,7 +80,10 @@ class _TrendState extends State<Trend> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    bool _first = true;
+    return SingleChildScrollViewWithScrollbar(
+      scrollbarColor: Colors.brown,
+      scrollbarThickness: 10.0,
       physics: BouncingScrollPhysics(),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -166,7 +170,28 @@ class _TrendState extends State<Trend> with WidgetsBindingObserver {
               ),
             ),
           ), */
+          Container(
+            height: 300,
+            alignment: Alignment.center,
+            
+            
+            child: InkWell(
+              onTap: (){
+                setState(() {
+                  _first = !_first;
 
+                });
+                
+              },
+              child: AnimatedCrossFade(
+                
+                duration: const Duration(seconds: 1),
+                firstChild: new Container(width: 200, height: 30, color: Colors.blue,),
+                secondChild: new Container(width: 100, height: 10, color: Colors.black,),
+                crossFadeState: _first ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+              ),
+            ),
+          ),
           Container(
             height: 50,
             width: double.infinity,
@@ -187,34 +212,36 @@ class _TrendState extends State<Trend> with WidgetsBindingObserver {
             color: Colors.indigoAccent,
             height: 200,
             width: double.infinity,
-            child: ListView.builder(
-              // physics: BouncingScrollPhysics(),
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: 5,
-              itemBuilder: (BuildContext context, int index) => 
-                Container(
-                  padding: EdgeInsets.all(4),
-                  
-                  width: 300,
-                  height: 150,
-                  decoration: BoxDecoration(borderRadius: new BorderRadius.circular(10.0)),
-                  child: ClipRRect(
-                    borderRadius: new BorderRadius.circular(10.0),
-                    child: FadeInImage.assetNetwork(
-                      placeholder: 'batman_black.webp',
-                      image: 'batman_black.webp', //snapshot.data[index].thumbnailUrl,
-                      fit: BoxFit.fill,
-                      height: 150,
-                    )
-                    /* CachedNetworkImage(
-                      imageUrl: snapshot.data[index].thumbnailUrl,
-                      placeholder: (context, url) => LoadingIndicator(),
-                      fit: BoxFit.cover,
-                      height: ManageDeviceInfo.resolutionHeight * 0.15,
-                    ) */,
+            child: Scrollbar(
+              child: ListView.builder(
+                // physics: BouncingScrollPhysics(),
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: 5,
+                itemBuilder: (BuildContext context, int index) => 
+                  Container(
+                    padding: EdgeInsets.all(4),
+                    
+                    width: 300,
+                    height: 150,
+                    decoration: BoxDecoration(borderRadius: new BorderRadius.circular(10.0)),
+                    child: ClipRRect(
+                      borderRadius: new BorderRadius.circular(10.0),
+                      child: FadeInImage.assetNetwork(
+                        placeholder: 'batman_black.webp',
+                        image: 'batman_black.webp', //snapshot.data[index].thumbnailUrl,
+                        fit: BoxFit.fill,
+                        height: 150,
+                      )
+                      /* CachedNetworkImage(
+                        imageUrl: snapshot.data[index].thumbnailUrl,
+                        placeholder: (context, url) => LoadingIndicator(),
+                        fit: BoxFit.cover,
+                        height: ManageDeviceInfo.resolutionHeight * 0.15,
+                      ) */,
+                    ),
                   ),
-                ),
+              ),
             ),
           ),
           Container(
@@ -790,5 +817,128 @@ class TrendCardList extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+
+
+class SingleChildScrollViewWithScrollbar extends StatefulWidget {
+  const SingleChildScrollViewWithScrollbar({
+    Key key,
+    this.scrollDirection = Axis.vertical,
+    this.reverse = false,
+    this.padding,
+    this.primary,
+    this.physics,
+    this.controller,
+    this.child,
+    this.dragStartBehavior = DragStartBehavior.down,
+    this.scrollbarColor,
+    this.scrollbarThickness = 6.0,
+  }) : super(key: key);
+
+  final Axis scrollDirection;
+  final bool reverse;
+  final EdgeInsets padding;
+  final bool primary;
+  final ScrollPhysics physics;
+  final ScrollController controller;
+  final Widget child;
+  final DragStartBehavior dragStartBehavior;
+  final Color scrollbarColor;
+  final double scrollbarThickness;
+
+  @override
+  _SingleChildScrollViewWithScrollbarState createState() => _SingleChildScrollViewWithScrollbarState();
+}
+
+class _SingleChildScrollViewWithScrollbarState extends State<SingleChildScrollViewWithScrollbar> {
+  AlwaysVisibleScrollbarPainter _scrollbarPainter;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    rebuildPainter();
+  }
+
+  @override
+  void didUpdateWidget(SingleChildScrollViewWithScrollbar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    rebuildPainter();
+  }
+
+  void rebuildPainter() {
+    final theme = Theme.of(context);
+    _scrollbarPainter = AlwaysVisibleScrollbarPainter(
+      color: widget.scrollbarColor ?? theme.highlightColor.withOpacity(1.0),
+      textDirection: Directionality.of(context),
+      thickness: widget.scrollbarThickness,
+    );
+  }
+
+  @override
+  void dispose() {
+    _scrollbarPainter?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RepaintBoundary(
+      child: CustomPaint(
+        foregroundPainter: _scrollbarPainter,
+        child: RepaintBoundary(
+          child: SingleChildScrollView(
+            scrollDirection: widget.scrollDirection,
+            reverse: widget.reverse,
+            padding: widget.padding,
+            primary: widget.primary,
+            physics: widget.physics,
+            controller: widget.controller,
+            dragStartBehavior: widget.dragStartBehavior,
+            child: Builder(
+              builder: (BuildContext context) {
+                _scrollbarPainter.scrollable = Scrollable.of(context);
+                return widget.child;
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class AlwaysVisibleScrollbarPainter extends ScrollbarPainter {
+  AlwaysVisibleScrollbarPainter({
+    @required Color color,
+    @required TextDirection textDirection,
+    @required double thickness,
+  }) : super(
+          color: color,
+          textDirection: textDirection,
+          thickness: thickness,
+          fadeoutOpacityAnimation: const AlwaysStoppedAnimation(1.0),
+        );
+
+  ScrollableState _scrollable;
+
+  ScrollableState get scrollable => _scrollable;
+
+  set scrollable(ScrollableState value) {
+    _scrollable?.position?.removeListener(_onScrollChanged);
+    _scrollable = value;
+    _scrollable?.position?.addListener(_onScrollChanged);
+    _onScrollChanged();
+  }
+
+  void _onScrollChanged() {
+    update(_scrollable.position, _scrollable.axisDirection);
+  }
+
+  @override
+  void dispose() {
+    _scrollable?.position?.removeListener(notifyListeners);
+    super.dispose();
   }
 }
